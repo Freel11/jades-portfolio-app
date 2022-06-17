@@ -52,7 +52,11 @@ app.get("/api/timestamp/:date", (req, res) => {
 // ************** Request Header Parser Microservice ***************
 
 app.get("/api/whoami", (req, res) => {
-  res.json({"message": "hello"})
+  res.json({
+    "ipaddress": req.ip, 
+    "language": req.headers["accept-language"],
+    "software": req.headers["user-agent"]
+    })
 })
 
 // listen for requests :)
