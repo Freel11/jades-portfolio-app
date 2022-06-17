@@ -1,21 +1,30 @@
 {
-	"name": "fcc-api-projects-boilerplate",
+	"name": "jades-portfolio-app",
 	"version": "0.0.1",
-	"description": "An FCC Backend Challenge",
+	"description": "Jade's FCC Backend Challenges",
+	"engines": {
+		"node": "16.x"
+	},
 	"main": "index.js",
 	"scripts": {
 		"start": "node index.js"
 	},
 	"dependencies": {
-		"express": "^4.12.4",
+		"ejs": "^3.1.5",
+		"express": "^4.15.2",
 		"cors": "^2.8.0"
+	},
+	"devDependencies": {
+		"got": "^11.3.0",
+		"tape": "^4.7.0"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://githost.com/camper/repo.git"
+		"url": "https://github.com/Freel11/jades-portfolio-app"
 	},
 	"keywords": [
 		"node",
+		"heroku",
 		"hyperdev",
 		"express",
 		"freecodecamp"
