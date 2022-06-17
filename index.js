@@ -19,11 +19,17 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-app.get("/api", (req, res) => {
+// ************** Timestamp Microservice ***************
+
+app.get("/timestamp", function (req, res) {
+  res.sendFile(__dirname + '/views/timestamp.html');
+});
+
+app.get("/api/timestamp", (req, res) => {
   res.json({"unix": Date.now(), "utc": new Date(Date.now()).toUTCString()})
 })
 
-app.get("/api/:date", (req, res) => {
+app.get("/api/timestamp/:date", (req, res) => {
   const dateString = req.params.date
   const isUnix = /^\d+$/.test(dateString);
   let date
