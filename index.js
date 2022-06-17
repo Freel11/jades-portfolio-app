@@ -19,11 +19,15 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-// ************** Timestamp Microservice ***************
-
 app.get("/timestamp", function (req, res) {
   res.sendFile(__dirname + '/views/timestamp.html');
 });
+
+app.get("/requestHeaderParser", function (req, res) {
+  res.sendFile(__dirname + '/views/requestHeaderParser.html');
+});
+
+// ************** Timestamp Microservice ***************
 
 app.get("/api/timestamp", (req, res) => {
   res.json({"unix": Date.now(), "utc": new Date(Date.now()).toUTCString()})
@@ -45,7 +49,11 @@ app.get("/api/timestamp/:date", (req, res) => {
     }
 })
 
+// ************** Request Header Parser Microservice ***************
 
+app.get("/api/whoami", (req, res) => {
+  res.json({"message": "hello"})
+})
 
 // listen for requests :)
 var listener = app.listen(port, function () {
