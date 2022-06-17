@@ -25,6 +25,12 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+app.get("/api/:date", (req, res) => {
+  const dateString = req.params.date
+  console.log(req.params)
+  res.json({"error": "Invalid Date"})
+})
+
 
 
 // listen for requests :)
