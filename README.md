@@ -1,3 +1,5 @@
-# Timestamp Microservice
+# Jade's FCC Backend Challenges
 
-This is the boilerplate code for the Timestamp Microservice project. Instructions for building your project can be found at https://www.freecodecamp.org/learn/apis-and-microservices/apis-and-microservices-projects/timestamp-microservice
+### Description:
+
+These are Jade's portfolio challenges as per the Back End Development and APIs Certification course of FreeCodeCamp's curriculum.
