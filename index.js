@@ -20,17 +20,22 @@ app.get("/", function (req, res) {
 });
 
 app.get("/api", (req, res) => {
-  console.log(Date.now())
-  res.json({"unix": Date.now()})
+  res.json({"unix": Date.now(), "utc": new Date(Date.now()).toUTCString()})
 })
 
 app.get("/api/:date", (req, res) => {
   const dateString = req.params.date
-  const date = new Date(dateString)
+  const isUnix = /^\d+$/.test(dateString);
+  let date
+  if (isUnix) {
+    date = new Date(dateString * 1000)
+  } else {
+    date = new Date(dateString)
+  }
   if (date == "Invalid Date") {
       res.json({"error": "Invalid Date"})
     } else {
-      res.json({"unix": Date.parse(dateString), "utc": date.toUTCString()})
+      res.json({"unix": isUnix ? dateString : Date.parse(dateString), "utc": date.toUTCString()})
     }
 })
 
