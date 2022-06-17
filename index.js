@@ -28,7 +28,7 @@ app.get("/api/:date", (req, res) => {
   const isUnix = /^\d+$/.test(dateString);
   let date
   if (isUnix) {
-    date = new Date(dateString * 1000)
+    date = new Date(+dateString)
   } else {
     date = new Date(dateString)
   }
