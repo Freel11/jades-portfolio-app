@@ -1,5 +1,3 @@
-var db_uri = "mongodb+srv://jade:D2wyGrmPfBvRqF8@cluster0.8xait.mongodb.net/?retryWrites=true&w=majority"
-
 // index.js
 // where your node app starts
 
@@ -12,8 +10,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser')
 var shortid = require('shortid')
 
-// mongoose.connect(process.env.DB_URI)
-mongoose.connect(db_uri)
+mongoose.connect(process.env.DB_URI)
 
 app.use(bodyParser.json())
 
