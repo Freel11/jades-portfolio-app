@@ -2,6 +2,7 @@
 // where your node app starts
 
 // init project
+require("dotenv").config()
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 3000;
@@ -10,7 +11,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser')
 var shortid = require('shortid')
 
-mongoose.connect(process.env.DB_URI)git
+mongoose.connect(process.env.DB_URI)
 
 app.use(bodyParser.json())
 
@@ -41,8 +42,8 @@ app.get("/urlShortener", function (req, res) {
   res.sendFile(__dirname + '/views/urlShortener.html');
 });
 
-app.get("/excerciseTracker", function (req, res) {
-  res.sendFile(__dirname + '/views/excerciseTracker.html');
+app.get("/exerciseTracker", function (req, res) {
+  res.sendFile(__dirname + '/views/exerciseTracker.html');
 });
 
 // ************** Timestamp Microservice ***************
@@ -116,6 +117,10 @@ app.get("/api/shorturl/:suffix", (req, res) => {
     res.redirect(urls[0].original_url)
   })
 })
+
+// ************** Exercise Tracker ***************
+
+
 
 // listen for requests :)
 var listener = app.listen(port, function () {
