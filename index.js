@@ -10,7 +10,7 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser')
 var shortid = require('shortid')
 
-mongoose.connect(process.env.DB_URI)
+mongoose.connect(process.env.DB_URI)git
 
 app.use(bodyParser.json())
 
