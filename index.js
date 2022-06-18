@@ -85,22 +85,28 @@ const ShortUrl = mongoose.model('ShortUrl', new mongoose.Schema({
 })) 
 
 app.post("/api/shorturl/", (req, res) => {
-  const url = req.body.url 
-  const suffix = shortid.generate()
+  const url = req.body.url
+  const url_prefix = url.substring(0, 4)
 
-  const newUrl = new ShortUrl({
-    original_url: url,
-    short_url: suffix
-  })
+  if (url_prefix != "http") {
+    res.json({"error": "invalid url"})
+  } else {
+    const suffix = shortid.generate()
 
-  newUrl.save((err, doc) => {
-    if (err) return console.log(err)
-  })
+    const newUrl = new ShortUrl({
+      original_url: url,
+      short_url: suffix
+    })
 
-  res.json({
-    "original_url": newUrl.original_url,
-    "short_url": newUrl.short_url
-  })
+    newUrl.save((err, doc) => {
+      if (err) return console.log(err)
+    })
+
+    res.json({
+      "original_url": newUrl.original_url,
+      "short_url": newUrl.short_url
+    })
+  } 
 })
 
 app.get("/api/shorturl/:suffix", (req, res) => {
