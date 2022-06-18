@@ -80,9 +80,8 @@ app.get("/api/whoami", (req, res) => {
 // ************** URL Shortener Microservice ***************
 
 const ShortUrl = mongoose.model('ShortUrl', new mongoose.Schema({
-  short_url: String,
   original_url: String,
-  suffix: String
+  short_url: String
 })) 
 
 app.post("/api/shorturl/", (req, res) => {
@@ -90,9 +89,8 @@ app.post("/api/shorturl/", (req, res) => {
   const suffix = shortid.generate()
 
   const newUrl = new ShortUrl({
-    short_url: `${__dirname}/api/shorturl/${suffix}`,
     original_url: url,
-    suffix: suffix
+    short_url: suffix
   })
 
   newUrl.save((err, doc) => {
@@ -100,15 +98,14 @@ app.post("/api/shorturl/", (req, res) => {
   })
 
   res.json({
-    "short_url": newUrl.short_url,
     "original_url": newUrl.original_url,
-    "suffix": newUrl.suffix
+    "short_url": newUrl.short_url
   })
 })
 
 app.get("/api/shorturl/:suffix", (req, res) => {
   const userSuffix = req.params.suffix
-  const requestedUrl = ShortUrl.find({suffix: userSuffix}).then((urls) => {
+  const requestedUrl = ShortUrl.find({short_url: userSuffix}).then((urls) => {
     res.redirect(urls[0].original_url)
   })
 })
