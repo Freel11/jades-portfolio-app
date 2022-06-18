@@ -44,6 +44,10 @@ app.get("/urlShortener", function (req, res) {
   res.sendFile(__dirname + '/views/urlShortener.html');
 });
 
+app.get("/excerciseTracker", function (req, res) {
+  res.sendFile(__dirname + '/views/excerciseTracker.html');
+});
+
 // ************** Timestamp Microservice ***************
 
 app.get("/api/timestamp", (req, res) => {
