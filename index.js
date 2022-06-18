@@ -1,3 +1,5 @@
+var db_uri = "mongodb+srv://jade:D2wyGrmPfBvRqF8@cluster0.8xait.mongodb.net/?retryWrites=true&w=majority"
+
 // index.js
 // where your node app starts
 
@@ -5,6 +7,17 @@
 var express = require('express');
 var app = express();
 var port = process.env.PORT || 3000;
+var mongo = require('mongodb');
+var mongoose = require('mongoose');
+var bodyParser = require('body-parser')
+var shortid = require('shortid')
+
+// mongoose.connect(process.env.DB_URI)
+mongoose.connect(db_uri)
+
+app.use(bodyParser.json())
+
+app.use(bodyParser.urlencoded({extended: false}))
 
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
@@ -25,6 +38,10 @@ app.get("/timestamp", function (req, res) {
 
 app.get("/requestHeaderParser", function (req, res) {
   res.sendFile(__dirname + '/views/requestHeaderParser.html');
+});
+
+app.get("/urlShortener", function (req, res) {
+  res.sendFile(__dirname + '/views/urlShortener.html');
 });
 
 // ************** Timestamp Microservice ***************
@@ -57,6 +74,43 @@ app.get("/api/whoami", (req, res) => {
     "language": req.headers["accept-language"],
     "software": req.headers["user-agent"]
     })
+})
+
+
+// ************** URL Shortener Microservice ***************
+
+const ShortUrl = mongoose.model('ShortUrl', new mongoose.Schema({
+  short_url: String,
+  original_url: String,
+  suffix: String
+})) 
+
+app.post("/api/shorturl/", (req, res) => {
+  const url = req.body.url 
+  const suffix = shortid.generate()
+
+  const newUrl = new ShortUrl({
+    short_url: `${__dirname}/api/shorturl/${suffix}`,
+    original_url: url,
+    suffix: suffix
+  })
+
+  newUrl.save((err, doc) => {
+    if (err) return console.log(err)
+  })
+
+  res.json({
+    "short_url": newUrl.short_url,
+    "original_url": newUrl.original_url,
+    "suffix": newUrl.suffix
+  })
+})
+
+app.get("/api/shorturl/:suffix", (req, res) => {
+  const userSuffix = req.params.suffix
+  const requestedUrl = ShortUrl.find({suffix: userSuffix}).then((urls) => {
+    res.redirect(urls[0].original_url)
+  })
 })
 
 // listen for requests :)
