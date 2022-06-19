@@ -2,55 +2,19 @@
 <html>
   <head>
     <title>File Metadata</title>
-    <link rel="shortcut icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon-32x32.png" type="image/x-icon"/>
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+      <link rel="shortcut icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon-32x32.png" type="image/x-icon"/>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Source+Sans+Pro&display=swap" rel="stylesheet">
+      <link href="style.css" rel="stylesheet" type="text/css">   
   </head>
-  <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      font-size: 16px;
-      color: #222;
-      background-color: #ECF0F1;
-      text-align: center;
-    }
-
-    .container {
-      padding: 0;
-      margin-top: 40px;
-    }
-
-    .footer {
-      margin-top: 60px;
-    }
-
-    a {
-      color: #2574A9;
-    }
-
-    input {
-      display: block;
-      position: relative;
-      margin: 10px auto;
-    }
-
-    input#button {
-      width: 230px;
-    }
-
-    .view {
-      position:relative;
-      margin: auto;
-      margin-top: 40px;
-      border: 1px  solid  #aaa;
-      padding: 20px;
-      width: 60%;
-      min-width: 400px;
-    }
-  </style>
   <body>
-    <div class="container">
-      <h2>API Project: File Metadata Microservice</h2>
-
+    <div class="title-container">
+      <h1 class="main-title">File Metadata Microservice</h1>
+      <div class="accent-box"></div>
+    </div>
+    <div class="content-container">
+      <p>This file gives the metadata of a file that the user uploads.</p>
       <h3>Usage:</h3>
       <p>
         Please Upload a File ...
@@ -58,16 +22,11 @@
       <div class="view">
         <h4 id="output"></h4>
         <form enctype="multipart/form-data" method="POST" action="/api/fileanalyse">
-          <input id="inputfield" type="file" name="upfile">
-          <input id="button" type="submit" value="Upload">
+          <input id="inputfield" type="file" name="upfile" >
+          <input id="button" type="submit" value="Upload" class="btn alt">
         </form>
       </div>
-    </div>
-    <div class="footer">
-      <p>
-        by 
-        <a href="http://www.freecodecamp.com">freeCodeCamp</a>
-      </p>
+      <a href="/" class="btn">Return Home</a>
     </div>
   </body>
 </html>
