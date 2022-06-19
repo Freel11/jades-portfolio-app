@@ -3,13 +3,15 @@
 
 // init project
 require("dotenv").config()
-var express = require('express');
-var app = express();
-var port = process.env.PORT || 3000;
-var mongo = require('mongodb');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser')
-var shortid = require('shortid')
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+const mongo = require('mongodb');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
+const shortid = require('shortid')
+const multer = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
 mongoose.connect(process.env.DB_URI)
 
@@ -19,7 +21,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
-var cors = require('cors');
+const cors = require('cors');
 app.use(cors({optionsSuccessStatus: 200}));  // some legacy browsers choke on 204
 
 // http://expressjs.com/en/starter/static-files.html
@@ -255,6 +257,14 @@ app.get("/api/users/:id/logs", (req, res) => {
 })
 
 // ************** File Metadata Microservice ***************
+
+app.post("/api/fileanalyse", upload.single('upfile'), (req, res) => {
+  res.json({
+    name: req.file.originalname,
+    type: req.file.mimetype,
+    size: req.file.size
+  })
+})
 
 // listen for requests :)
 var listener = app.listen(port, function () {
