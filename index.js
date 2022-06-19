@@ -140,6 +140,11 @@ app.post("/api/users", (req, res) => {
   })
 })
 
+app.get("/api/users", async (req, res) => {
+  const users = await ExerciseUser.find()
+  res.json(users)
+})
+
 // listen for requests :)
 var listener = app.listen(port, function () {
   console.log('Your app is listening on port ' + listener.address().port);
