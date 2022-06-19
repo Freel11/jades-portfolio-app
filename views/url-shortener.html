@@ -1,29 +1,30 @@
 <!DOCTYPE html>
-
 <html>
   <head>
-    <title>URL Shortener Microservice | freeCodeCamp.org</title>
+    <title>URL Shortener Microservice | Jade's Portfolio App</title>
       <link rel="shortcut icon" href="https://cdn.hyperdev.com/us-east-1%3A52a203ff-088b-420f-81be-45bf559d01b1%2Ffavicon.ico" type="image/x-icon"/>
-      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Source+Sans+Pro&display=swap" rel="stylesheet">
       <link href="style.css" rel="stylesheet" type="text/css">
   </head>
-
   <body>
-    <h1>URL Shortener Microservice</h1>
-    <main>
+    <div class="title-container">
+      <h1 class="main-title">URL Shortener Microservice</h1>
+      <div class="accent-box"></div>
+    </div>
+    <div class="content-container">
       <section>
         <form action="api/shorturl" method="POST">
           <fieldset>
             <legend>URL Shortener</legend>
             <label for="url_input">URL:</label>
             <input id="url_input" type="text" name="url" placeholder="https://www.freecodecamp.org/" />
-            <input type="submit" value="POST URL" />
+            <input type="submit" value="POST URL" class="btn alt"/>
           </fieldset>
         </form>
       </section>
-    </main>
-    <footer>
-      <p>By <a href="https://www.freecodecamp.org/">freeCodeCamp</a></p>
-    </footer>
+      <a href="/" class="btn">Return Home</a>
+    </div>
   </body>
 </html>
