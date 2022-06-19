@@ -3,18 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Source+Sans+Pro&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="style.css">
   <title>Jade's Portfolio App</title>
 </head>
-<body>
+<body class="main-home">
   <div class="container">
-    <h2>Jade Freel's Portfolio App</h2>
-    <ol>
-      <li><a href="/timestamp">Timestamp Microservice</a></li>
-      <li><a href="/request-header-parser">Request Header Parser</a></li>
-      <li><a href="/url-shortener">URL Shortener</a></li>
-      <li><a href="/exercise-tracker">Exercise Tracker</a></li>
-      <li><a href="/file-metadata">File Metadata</a></li>
-    </ol>
+    <div class="title-container">
+      <h1 class="main-title">Jade Freel's Full Stack Portfolio App</h1>
+    </div>
+    <div class="content-container">
+      <p>To claim <a href="https://www.freecodecamp.org">FreeCodeCamp's</a> Back End Development and APIs certification I had to build 5 applications/Microservices using the skills I aquired during the course</p>
+
+      <p>These challenges were completed using <a href="https://nodejs.org">Node.js</a>, <a href="https://expressjs.com/">Express</a> and <a href="https://www.mongodb.com/">MongoDB</a></p>
+      <ul class="projects">
+        <a href="/timestamp"><li class="project">Timestamp Microservice</li></a>
+        <a href="/request-header-parser"><li class="project">Request Header Parser</li></a>
+        <a href="/url-shortener"><li class="project">URL Shortener</li></a>
+        <a href="/exercise-tracker"><li class="project">Exercise Tracker</li></a>
+        <a href="/file-metadata"><li class="project">File Metadata</li></a>
+      </ul>
+    </div>
   </div>
 </body>
 </html>
