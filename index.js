@@ -189,6 +189,47 @@ app.get("/api/users", async (req, res) => {
   res.json(users)
 })
 
+app.get("/api/users/:id/logs", (req, res) => {
+  const id = req.params.id
+  let username, userId, count, log
+  ExerciseUser.findById(id, (err, userData) => {
+    if (err || !userData) {
+      res.send("Could not find user")
+      console.log(err)
+    } else {
+      username = userData.username
+      userId = userData.id
+
+      Exercise.find({userId: userId}, (err, exerciseData) => {
+        if (err) {
+          res.send(`There was an error retrieving the exercise data for ${username}` )
+        } else if (!exerciseData) {
+          res.json({
+            username,
+            count: 0,
+            id,
+            log: []
+          })
+        } else {
+          res.json({
+            username,
+            count: exerciseData.length,
+            id,
+            log: exerciseData.map(exercise => {
+              const {description, duration, date} = exercise
+              return {
+                description,
+                duration,
+                date: date.toDateString()
+              }
+            })
+          })
+        }
+      })
+    }
+  })
+})
+
 // listen for requests :)
 var listener = app.listen(port, function () {
   console.log('Your app is listening on port ' + listener.address().port);
