@@ -120,7 +120,25 @@ app.get("/api/shorturl/:suffix", (req, res) => {
 
 // ************** Exercise Tracker ***************
 
+const ExerciseUser = mongoose.model('ExerciseUser', new mongoose.Schema({
+  _id: String,
+  username: String
+}))
 
+app.post("/api/users", (req, res) => {
+  const newUser = new ExerciseUser({
+    _id: shortid.generate(),
+    username: req.body.username
+  })
+
+  newUser.save((err, docs) => {
+    if (err) return console.log(err)
+    res.json({
+      "username": newUser.username,
+      "_id": newUser._id
+    })
+  })
+})
 
 // listen for requests :)
 var listener = app.listen(port, function () {
