@@ -190,7 +190,8 @@ app.get("/api/users", async (req, res) => {
 })
 
 app.get("/api/users/:id/logs", (req, res) => {
-  const id = req.params.id
+  const { id } = req.params
+  const { from, to, limit } = req.query
   let username, userId, count, log
   ExerciseUser.findById(id, (err, userData) => {
     if (err || !userData) {
@@ -200,7 +201,26 @@ app.get("/api/users/:id/logs", (req, res) => {
       username = userData.username
       userId = userData.id
 
-      Exercise.find({userId: userId}, (err, exerciseData) => {
+      const dateObj = {}
+
+      if (from) {
+        dateObj["$gte"] = new Date(from)
+      }
+      if (to) {
+        dateObj["$lte"] = new Date(to)
+      }
+
+      let filter = {
+        userId
+      }
+
+      if (from || to) {
+        filter.date = dateObj
+      }
+
+      const nonNullLimit = limit ?? 500
+
+      Exercise.find(filter).limit(+nonNullLimit).exec((err, exerciseData) => {
         if (err) {
           res.send(`There was an error retrieving the exercise data for ${username}` )
         } else if (!exerciseData) {
