@@ -46,6 +46,10 @@ app.get("/exercise-tracker", function (req, res) {
   res.sendFile(__dirname + '/views/exercise-tracker.html');
 });
 
+app.get("/file-metadata", function (req, res) {
+  res.sendFile(__dirname + '/views/file-metadata.html');
+});
+
 // ************** Timestamp Microservice ***************
 
 app.get("/api/timestamp", (req, res) => {
