@@ -2,4 +2,4 @@
 
 ### Description:
 
-These are Jade's portfolio challenges as per the Back End Development and APIs Certification course of FreeCodeCamp's curriculum.
+These are the challenges I completed for [FreeCodeCamp's](https://www.freecodecamp.org) Back End Development and APIs course. You can view the live app [here](https://jades-portfolio-app.herokuapp.com/).
