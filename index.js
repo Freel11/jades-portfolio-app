@@ -122,21 +122,65 @@ app.get("/api/shorturl/:suffix", (req, res) => {
 
 const ExerciseUser = mongoose.model('ExerciseUser', new mongoose.Schema({
   _id: String,
-  username: String
+  username: {type: String, unique: true}
+}))
+
+const Exercise = mongoose.model('Exercise', new mongoose.Schema({
+  userId: {type: String, required: true},
+  description: String,
+  duration: Number,
+  date: Date
 }))
 
 app.post("/api/users", (req, res) => {
   const newUser = new ExerciseUser({
-    _id: shortid.generate(),
+    _id: mongoose.Types.ObjectId(),
     username: req.body.username
   })
 
   newUser.save((err, docs) => {
-    if (err) return console.log(err)
+    if (err) {
+      err.code == 11000 ? res.json({"error": "username already exists"}) : res.json(err)
+      return console.log(err)
+    } 
     res.json({
       "username": newUser.username,
       "_id": newUser._id
     })
+  })
+})
+
+app.post("/api/users/:id/exercises", (req, res) => {
+  const id = req.params.id
+  const {description, duration, date} = req.body
+
+  ExerciseUser.findById(id, (err, userData) => {
+    if(err || !userData) {
+      res.send("Could not find user")
+    } else {
+      const newExercise = new Exercise({
+        userId: id,
+        description,
+        duration,
+        date: date ? new Date(date) : new Date()
+      })
+
+      newExercise.save((err, data) => {
+        if (err || !data) {
+          res.send("There was an error saving this exercise")
+          console.log(err)
+        } else {
+          const {description, duration, date} = data
+          res.json({
+            username: userData.username,
+            description,
+            duration,
+            date: date.toDateString(),
+            _id: userData.id
+          })
+        }
+      })
+    }
   })
 })
 
