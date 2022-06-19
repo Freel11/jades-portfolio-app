@@ -34,16 +34,16 @@ app.get("/timestamp", function (req, res) {
   res.sendFile(__dirname + '/views/timestamp.html');
 });
 
-app.get("/requestHeaderParser", function (req, res) {
-  res.sendFile(__dirname + '/views/requestHeaderParser.html');
+app.get("/request-header-parser", function (req, res) {
+  res.sendFile(__dirname + '/views/request-header-parser.html');
 });
 
-app.get("/urlShortener", function (req, res) {
-  res.sendFile(__dirname + '/views/urlShortener.html');
+app.get("/url-shortener", function (req, res) {
+  res.sendFile(__dirname + '/views/url-shortener.html');
 });
 
-app.get("/exerciseTracker", function (req, res) {
-  res.sendFile(__dirname + '/views/exerciseTracker.html');
+app.get("/exercise-tracker", function (req, res) {
+  res.sendFile(__dirname + '/views/exercise-tracker.html');
 });
 
 // ************** Timestamp Microservice ***************
@@ -249,6 +249,8 @@ app.get("/api/users/:id/logs", (req, res) => {
     }
   })
 })
+
+// ************** File Metadata Microservice ***************
 
 // listen for requests :)
 var listener = app.listen(port, function () {
